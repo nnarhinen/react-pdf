@@ -1,30 +1,19 @@
 const webpack = require('webpack');
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: [
-    './src-sample/index.html',
-    './src-sample/sample.jsx',
-    './src-sample/sample.pdf',
-  ],
+  entry: './sample',
   output: {
-    path: './sample',
-    filename: 'sample.js',
-    chunkFilename: 'sample.js',
+    path: path.join(__dirname, 'build'),
+    filename: '[name].bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        use: 'file-loader?name=[name].[ext]',
-      },
-      {
-        test: /\.pdf$/,
-        use: 'url-loader',
-      },
       {
         test: /\.less$/,
         use: [
@@ -34,7 +23,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
@@ -47,5 +36,9 @@ module.exports = {
       },
     }),
     new webpack.optimize.UglifyJsPlugin(),
+    new CopyWebpackPlugin([
+      { from: './index.html' },
+      { from: './sample.pdf' },
+    ]),
   ],
 };

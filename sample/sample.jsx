@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import ReactPDF from '../src/react-pdf';
+import { render } from 'react-dom';
+import ReactPDF from 'react-pdf';
 
 import './sample.less';
 
@@ -76,4 +76,4 @@ class Example extends Component {
   }
 }
 
-ReactDOM.render(<Example />, document.getElementById('react-container'));
+render(<Example />, document.getElementById('react-container'));

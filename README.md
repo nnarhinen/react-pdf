@@ -18,7 +18,7 @@ You'll need to have Node >= 4 on your machine.
 
 We strongly recommend to use Node >= 6 and npm >= 3 for faster installation speed and better disk usage.
 
-Your project needs to use React 15.0.0 or later.
+Your project needs to use React 15.5.0 or later.
 
 ### Installation
 
@@ -65,7 +65,7 @@ Check the sample directory of this repository for a full working example.
 
 |Prop name|Description|Example of usage|
 |----|----|----|
-|file|Defines what PDF should be displayed.<br />Its value can be an URL, a file (imported using `import ... from ...` or from file input form element), or an object with parameters (`url` - URL; `data` - data, preferably Uint8Array; `range` - PDFDataRangeTransport; `httpHeaders` - custom request headers, e.g. for authorization), `withCredentials` - a boolean to indicate whether or not to include cookies in the request (defaults to `false`).|<ul><li>URL:<br />`file="http://example.com/sample.pdf"`</li><li>File:<br />`import sample from '../static/sample.pdf'` and then<br />`file={sample}`</li><li>Parameter object:<br />`file={{ url: 'http://example.com/sample.pdf', httpHeaders: { 'X-CustomHeader': '40359820958024350238508234' }, withCredentials: true}}`</ul>|
+|file|Defines what PDF should be displayed.<br />Its value can be an URL, a file (imported using `import ... from ...` or from file input form element), or an object with parameters (`url` - URL; `data` - data, preferably Uint8Array; `range` - PDFDataRangeTransport; `httpHeaders` - custom request headers, e.g. for authorization), `withCredentials` - a boolean to indicate whether or not to include cookies in the request (defaults to `false`).|<ul><li>URL:<br />`file="http://example.com/sample.pdf"`</li><li>File:<br />`import sample from '../static/sample.pdf'` and then<br />`file={sample}`</li><li>Parameter object:<br />`file={{ url: 'http://example.com/sample.pdf', httpHeaders: { 'X-CustomHeader': '40359820958024350238508234' }, withCredentials: true}}`</ul>| 
 |loading|Defines what the component should display while loading. Defaults to "Loading PDF…".|<ul><li>String:<br />`loading="Please wait!"`</li><li>React element:<Br />`loading={<div>Please wait!</div>}`</li><li>Function:<Br />`loading={this.renderLoader()}`</li></ul>|
 |error|Defines what the component should display in case of an error. Defaults to "Failed to load PDF file.".|<ul><li>String:<br />`error="An error occurred!"`</li><li>React element:<Br />`error={<div>An error occurred!</div>}`</li><li>Function:<Br />`error={this.renderError()}`</li></ul>|
 |noData|Defines what the component should display in case of no data. Defaults to "No PDF file specified.".|<ul><li>String:<br />`noData="Please select a file."`</li><li>React element:<Br />`noData={<div>Please select a file.</div>}`</li><li>Function:<Br />`noData={this.renderNoData()}`</li></ul>|
@@ -77,6 +77,22 @@ Check the sample directory of this repository for a full working example.
 |onPageLoad|Function called when the page is successfully loaded to the memory.|`onPageLoad={({ pageIndex, pageNumber, width, height, originalWidth, originalHeight, scale }) => alert('Now displaying a page number ' + pageNumber + '!')}`|
 |onPageRender|Function called when the page is successfully rendered on the screen.|`onPageLoad={() => alert('Rendered the page!')}`|
 |onPageError|Function called in case of an error while rendering a page.|`onPageError={({ message }) => alert('Error while loading page! ' + message)}`|
+
+#### Usage without worker
+
+If you want to use React-PDF without PDF.js worker, instead of importing React-PDF like so:
+
+```js
+import ReactPDF from 'react-pdf';
+```
+
+use the following syntax:
+
+```js
+import ReactPDF from 'react-pdf/build/react-pdf.entry.noworker';
+```
+
+Please note that while by doing so your bundle size will be reduced, it may negatively affect React-PDF performance, so it is not recommended unless bundle size is your absolute priority.
 
 ## License
 
